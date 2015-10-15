@@ -14,6 +14,6 @@ Ow, almost forget... generated PDF is in polish.
 
 Examples:
 
-![alt tag](001.png)
-![alt tag](002.png)
-![alt tag](003.png)
+![alt tag](01.png)
+![alt tag](02.png)
+![alt tag](03.png)
