@@ -11,3 +11,9 @@ iText library.
 I've created it purly for me, my family and my friends but if you find it usefull then help yourself. 
 
 Ow, almost forget... generated PDF is in polish.
+
+Examples:
+
+![alt tag](001.png)
+![alt tag](002.png)
+![alt tag](003.png)
