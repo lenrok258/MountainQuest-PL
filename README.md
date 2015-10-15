@@ -5,8 +5,9 @@ Repository contains both source code (Java) which was used to generate PDF and P
 Shalters' data was taken for muliple pages but the majority of it from http://www.gdzie-wyjechac.pl/pl/pasma-gorskie/.
 
 Java code was writen do to it's work and is not DRY, SOLID, KISS etc... so don't expect tests ;-).
-PDF is generated using itext library.
+PDF is generated using 
+iText library.
 
-I've done it purly for me, my family and my friends but if you find it usefull then help yourself. 
+I've created it purly for me, my family and my friends but if you find it usefull then help yourself. 
 
 Ow, almost forget... generated PDF is in polish.
