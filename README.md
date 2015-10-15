@@ -1,7 +1,7 @@
 # MountainQuest-PL
 Little book containing mountain shelters in Poland. Each page contains data, picture, map, description and place for stamp. Put it in your pocket, hit the road and collect all stamps! :-)
 
-Repository contains both srouce code (Java) which was used to generate PDF and PDF itself.
+Repository contains both source code (Java) which was used to generate PDF and PDF itself.
 Shalters' data was taken for muliple pages but the majority of it from http://www.gdzie-wyjechac.pl/pl/pasma-gorskie/.
 
 Java code was writen do to it's work and is not DRY, SOLID, KISS etc... so don't expect tests ;-).
