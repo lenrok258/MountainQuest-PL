@@ -1,6 +1,5 @@
 *iml
 target/
-*pdf
 .idea/
 src/main/resources/todo/
 
