@@ -6,9 +6,8 @@ Shalters' data was taken for muliple pages but the majority of it from http://ww
 
 Java code was writen do to it's work and is not DRY, SOLID, KISS etc... so don't expect tests ;-).
 PDF is generated using iText library. 
-Input data is located in 'data' directory. Each directory there represents one page. Each page is described by two files: dane.json (data) and one png or jpg image (file's name doesn't matter). By changing data project may be easy adjusted to other langiages or purposes.
 
-I've created it purly for me, my family and my friends but if you find it usefull then help yourself. 
+I've created it purly for me, my family and my friends but if you find it usefull then help yourself. Input data is located in 'data' directory. Each directory there represents one page. Each page is described with two files: dane.json (data) and one png or jpg image (file's name doesn't matter). By changing data project may be easy adjusted to other langiages or purposes.
 
 Ow, almost forget... generated PDF is in polish.
 
