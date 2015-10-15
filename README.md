@@ -9,6 +9,8 @@ PDF is generated using iText library.
 
 I've created it purly for me, my family and my friends but if you find it usefull then help yourself. Input data is located in 'data' directory. Each directory there represents one page. Each page is described with two files: dane.json (data) and one png or jpg image (file's name doesn't matter). By changing data project may be easy adjusted to other languages or purposes.
 
+Please note that all my work is licenced with CC zero lincense... but I do not own rights to data like descriptions, names and photos. Please be aware of this if you would like to use it commercially. 
+
 Ow, almost forget... generated PDF is in polish.
 
 Examples:
