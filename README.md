@@ -8,3 +8,5 @@ Java code was writen do to it's work and is not DRY, SOLID, KISS etc... so don't
 PDF is generated using itext library.
 
 I've done it purly for me, my family and my friends but if you find it usefull then help yourself. 
+
+Ow, almost forget... generated PDF is in polish.
