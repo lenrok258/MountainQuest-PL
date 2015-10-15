@@ -5,8 +5,8 @@ Repository contains both source code (Java) which was used to generate PDF and P
 Shalters' data was taken for muliple pages but the majority of it from http://www.gdzie-wyjechac.pl/pl/pasma-gorskie/.
 
 Java code was writen do to it's work and is not DRY, SOLID, KISS etc... so don't expect tests ;-).
-PDF is generated using 
-iText library.
+PDF is generated using iText library. 
+Input data is located in 'data' directory. Each directory there represents one page. Each page is described by two files: dane.json (data) and one png or jpg image (file's name doesn't matter). By changing data project may be easy adjusted to other langiages or purposes.
 
 I've created it purly for me, my family and my friends but if you find it usefull then help yourself. 
 
