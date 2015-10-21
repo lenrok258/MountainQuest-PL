@@ -30,16 +30,17 @@ public class Generator {
     }
 
     public void generatePdf(List<Data> data) throws IOException, DocumentException {
-        data.stream()
-                .forEach(item -> {
-                    System.out.println(item.title);
-                    generatePage(item);
-                });
+
+        for (int i = 0; i < data.size(); i++) {
+            Data dataItem = data.get(i);
+            System.out.println(dataItem.title);
+            generatePage(dataItem, i + 1);
+        }
     }
 
-    public void generatePage(Data data) {
+    public void generatePage(Data data, int pageNumber) {
         try {
-            document.add(generateMainTable(data));
+            document.add(generateMainTable(data, pageNumber));
             document.newPage();
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +51,7 @@ public class Generator {
         document.close();
     }
 
-    private PdfPTable generateMainTable(Data data) throws DocumentException, IOException {
+    private PdfPTable generateMainTable(Data data, int pageNumber) throws DocumentException, IOException {
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100f);
         table.setWidths(new int[]{1, 1, 1, 1});
@@ -62,6 +63,7 @@ public class Generator {
         table.addCell(generateMapImage(data));
         table.addCell(generateDescription(data));
         table.addCell(generateStamp(data));
+        table.addCell(generatePageNumber(pageNumber));
 
         return table;
     }
@@ -95,7 +97,7 @@ public class Generator {
 
     private PdfPCell generatePhoto(Data data) throws IOException, DocumentException {
         PdfPCell cell;
-        if ( data.photoUrl == null ) {
+        if (data.photoUrl == null) {
             cell = new PdfPCell(phrase("No image"));
         } else {
             cell = new PdfPCell(imagePhoto(data.photoUrl), true);
@@ -132,11 +134,22 @@ public class Generator {
 
     }
 
+    private PdfPCell generatePageNumber(int pageNumber) throws IOException, DocumentException {
+        PdfPCell cell = new PdfPCell(phrase(String.valueOf(pageNumber)));
+        cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setColspan(2);
+        cell.setBorder(0);
+        cell.setPaddingBottom(10);
+        cell.setBorderWidthBottom(1);
+        return cell;
+    }
+
     private PdfPCell generateStamp(Data data) throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(phrase("Data i pieczątka"));
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
-        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        cell.setColspan(4);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        cell.setColspan(2);
         cell.setBorder(0);
         cell.setPaddingBottom(10);
         cell.setBorderWidthBottom(1);
