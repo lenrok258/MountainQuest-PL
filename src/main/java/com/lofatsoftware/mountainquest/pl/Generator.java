@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.Random;
 
 public class Generator {
 
@@ -29,12 +30,13 @@ public class Generator {
         document.open();
     }
 
-    public void generatePdf(List<Data> data) throws IOException, DocumentException {
+    public void generatePdf(List<Data> data) throws IOException, DocumentException, InterruptedException {
 
         for (int i = 0; i < data.size(); i++) {
             Data dataItem = data.get(i);
             System.out.println(dataItem.title);
             generatePage(dataItem, i + 1);
+            Thread.sleep(Math.abs(new Random(System.currentTimeMillis()).nextLong()) % 1000); // trick GMaps API
         }
 
         //TODO: Generate empty pages at the end
