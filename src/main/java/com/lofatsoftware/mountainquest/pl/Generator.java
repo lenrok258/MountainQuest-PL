@@ -36,6 +36,8 @@ public class Generator {
             System.out.println(dataItem.title);
             generatePage(dataItem, i + 1);
         }
+
+        //TODO: Generate empty pages at the end
     }
 
     public void generatePage(Data data, int pageNumber) {
@@ -123,7 +125,7 @@ public class Generator {
     }
 
     private PdfPCell generateDescription(Data data) throws IOException, DocumentException {
-        PdfPCell cell = new PdfPCell(phrase(data.description, 12));
+        PdfPCell cell = new PdfPCell(phrase(data.description, 14));
         cell.setColspan(4);
         cell.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
         cell.setBorder(0);
