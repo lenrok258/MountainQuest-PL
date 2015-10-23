@@ -10,17 +10,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 public class Generator {
 
     private static final String RESULT_FILE = "mountain-quest-pl.pdf";
     private static final int PAGE_MARGIN = 20;
     private static final float GOOGLE_MAPS_FOOTER_HEIGHT = 44f;
+    private static final int NUMBER_OF_EMPTY_PAGES = 20;
 
     private final Document document;
     private final PdfWriter writer;
+    private final LinkedHashMap<String, String> tableOfContents = new LinkedHashMap<>();
 
     public Generator() throws FileNotFoundException, DocumentException {
         document = new Document(PageSize.A4, PAGE_MARGIN, PAGE_MARGIN, PAGE_MARGIN, PAGE_MARGIN);
@@ -35,7 +37,8 @@ public class Generator {
             generatePage(dataItem, pageNumber);
         }
 
-        generateEmptyPages(pageNumber, 20);
+        generateEmptyPages(pageNumber, NUMBER_OF_EMPTY_PAGES);
+        generateTableOfContents();
     }
 
     public void closeDocument() {
@@ -48,6 +51,7 @@ public class Generator {
             Thread.sleep(Math.abs(new Random(System.currentTimeMillis()).nextLong()) % 1000); // trick GMaps API
             document.add(generateMainTable(data, pageNumber));
             document.newPage();
+            tableOfContents.put(String.valueOf(pageNumber), data.title);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,6 +65,36 @@ public class Generator {
             document.add(emptyWithPageNumber);
             document.newPage();
         }
+        tableOfContents.put((previousPageNumber + 1) + "-" + (previousPageNumber + howManyPages), "Puste strony");
+    }
+
+    private void generateTableOfContents() throws DocumentException, IOException {
+        PdfPTable table = new PdfPTable(4);
+        table.setWidthPercentage(100f);
+        table.setWidths(new int[]{1, 1, 1, 1});
+        for (String key : tableOfContents.keySet()) {
+            table.addCell(generateTableOfContentsValue(tableOfContents.get(key)));
+            table.addCell(generateTableOfContentsKey(key));
+        }
+        document.add(table);
+        document.newPage();
+    }
+
+    private PdfPCell generateTableOfContentsValue(String value) throws IOException, DocumentException {
+        PdfPCell cell = new PdfPCell(phrase(value, 12, Font.BOLD));
+        cell.setBorder(0);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        cell.setColspan(3);
+        return cell;
+    }
+
+    private PdfPCell generateTableOfContentsKey(String key) throws IOException, DocumentException {
+        PdfPCell cell = new PdfPCell(phrase(key, 12, Font.BOLD));
+        cell.setBorder(0);
+        cell.setBorderWidthBottom(1);
+        cell.setBorderColor(BaseColor.LIGHT_GRAY);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        return cell;
     }
 
     private PdfPTable generateEmptyPage(int pageNumber) throws DocumentException, IOException {
