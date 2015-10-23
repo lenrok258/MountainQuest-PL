@@ -1,8 +1,6 @@
 package com.lofatsoftware.mountainquest.pl;
 
 import com.itextpdf.text.*;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.*;
 import com.lofatsoftware.mountainquest.pl.data.Data;
 
@@ -31,19 +29,23 @@ public class Generator {
     }
 
     public void generatePdf(List<Data> data) throws IOException, DocumentException, InterruptedException {
-
-        for (int i = 0; i < data.size(); i++) {
-            Data dataItem = data.get(i);
-            System.out.println(dataItem.title);
-            generatePage(dataItem, i + 1);
-            Thread.sleep(Math.abs(new Random(System.currentTimeMillis()).nextLong()) % 1000); // trick GMaps API
+        int pageNumber = 1;
+        for (; pageNumber <= data.size(); pageNumber++) {
+            Data dataItem = data.get(pageNumber - 1);
+            generatePage(dataItem, pageNumber);
         }
 
-        //TODO: Generate empty pages at the end
+        generateEmptyPages(pageNumber, 20);
     }
 
-    public void generatePage(Data data, int pageNumber) {
+    public void closeDocument() {
+        document.close();
+    }
+
+    private void generatePage(Data data, int pageNumber) {
         try {
+            System.out.println(MessageFormat.format("Page {0}: {1}", pageNumber, data.title));
+            Thread.sleep(Math.abs(new Random(System.currentTimeMillis()).nextLong()) % 1000); // trick GMaps API
             document.add(generateMainTable(data, pageNumber));
             document.newPage();
         } catch (Exception e) {
@@ -51,8 +53,23 @@ public class Generator {
         }
     }
 
-    public void closeDocument() {
-        document.close();
+    private void generateEmptyPages(final int previousPageNumber, final int howManyPages) throws DocumentException, IOException {
+        for (int i = 0; i < howManyPages; i++) {
+            int pageNumber = previousPageNumber + i;
+            System.out.println(MessageFormat.format("Page {0}: Empty page", pageNumber));
+            PdfPTable emptyWithPageNumber = generateEmptyPage(pageNumber);
+            document.add(emptyWithPageNumber);
+            document.newPage();
+        }
+    }
+
+    private PdfPTable generateEmptyPage(int pageNumber) throws DocumentException, IOException {
+        PdfPTable table = new PdfPTable(2);
+        table.setWidthPercentage(100f);
+        table.setWidths(new int[]{1, 1});
+        table.setExtendLastRow(true);
+        table.addCell(generatePageNumber(pageNumber));
+        return table;
     }
 
     private PdfPTable generateMainTable(Data data, int pageNumber) throws DocumentException, IOException {
@@ -139,7 +156,7 @@ public class Generator {
     }
 
     private PdfPCell generatePageNumber(int pageNumber) throws IOException, DocumentException {
-        PdfPCell cell = new PdfPCell(phrase(String.valueOf(pageNumber)));
+        PdfPCell cell = new PdfPCell(phrase("- " + pageNumber + " -"));
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.setColspan(2);
@@ -173,8 +190,10 @@ public class Generator {
     }
 
     private Font font(float fontSize, int style) throws IOException, DocumentException {
-        BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
-        return new Font(baseFont, fontSize, style);
+        //BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+        //FontFactory.register("/usr/share/fonts/truetype/abyssinica/", "my_bold_font");
+        return FontFactory.getFont("Times-Roman", BaseFont.CP1250, BaseFont.EMBEDDED, fontSize, style);
+        //return new Font(baseFont, fontSize, style);
     }
 
     private Image imagePhoto(String imagePath) throws DocumentException, IOException {
