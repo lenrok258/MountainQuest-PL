@@ -22,7 +22,9 @@ public class Generator {
 
     private final Document document;
     private final PdfWriter writer;
-    private final LinkedHashMap<String, String> tableOfContents = new LinkedHashMap<>();
+    private final LinkedHashMap<String, Data> tableOfContents = new LinkedHashMap<>();
+
+    private String currentSection = "";
 
     public Generator() throws FileNotFoundException, DocumentException {
         document = new Document(PageSize.A4, PAGE_MARGIN, PAGE_MARGIN, PAGE_MARGIN, PAGE_MARGIN);
@@ -48,10 +50,10 @@ public class Generator {
     private void generatePage(Data data, int pageNumber) {
         try {
             System.out.println(MessageFormat.format("Page {0}: {1}", pageNumber, data.title));
-            Thread.sleep(Math.abs(new Random(System.currentTimeMillis()).nextLong()) % 1000); // trick GMaps API
+            Thread.sleep(Math.abs(new Random(System.currentTimeMillis()).nextLong()) % 5000); // trick GMaps API
             document.add(generateMainTable(data, pageNumber));
             document.newPage();
-            tableOfContents.put(String.valueOf(pageNumber), data.title);
+            tableOfContents.put(String.valueOf(pageNumber), data);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,25 +67,53 @@ public class Generator {
             document.add(emptyWithPageNumber);
             document.newPage();
         }
-        tableOfContents.put((previousPageNumber + 1) + "-" + (previousPageNumber + howManyPages), "Puste strony");
     }
 
     private void generateTableOfContents() throws DocumentException, IOException {
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100f);
         table.setWidths(new int[]{1, 1, 1, 1});
+
+        table.addCell(generateTableOfContentsTitle());
+
         for (String key : tableOfContents.keySet()) {
-            table.addCell(generateTableOfContentsValue(tableOfContents.get(key)));
+            generateSectionTitle(table, tableOfContents.get(key));
+            table.addCell(generateTableOfContentsValue(tableOfContents.get(key).title));
             table.addCell(generateTableOfContentsKey(key));
         }
+
         document.add(table);
         document.newPage();
+    }
+
+    private PdfPCell generateTableOfContentsTitle() throws IOException, DocumentException {
+        PdfPCell cell = new PdfPCell(phrase("Spis treści", 18, Font.BOLD));
+        cell.setBorder(0);
+        cell.setPaddingBottom(10);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        cell.setColspan(4);
+        return cell;
+    }
+
+    private void generateSectionTitle(PdfPTable table, Data data) throws IOException, DocumentException {
+        if ( !this.currentSection.equals(data.mountains) ) {
+            currentSection = data.mountains;
+
+            PdfPCell cell = new PdfPCell(phrase(currentSection, 14, Font.BOLD));
+            cell.setBorder(0);
+            cell.setPaddingTop(10);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setColspan(4);
+            table.addCell(cell);
+        }
     }
 
     private PdfPCell generateTableOfContentsValue(String value) throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(phrase(value, 12, Font.BOLD));
         cell.setBorder(0);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        cell.setPaddingBottom(3);
+        cell.setPaddingLeft(10);
         cell.setColspan(3);
         return cell;
     }
@@ -94,6 +124,7 @@ public class Generator {
         cell.setBorderWidthBottom(1);
         cell.setBorderColor(BaseColor.LIGHT_GRAY);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setPaddingBottom(3);
         return cell;
     }
 
