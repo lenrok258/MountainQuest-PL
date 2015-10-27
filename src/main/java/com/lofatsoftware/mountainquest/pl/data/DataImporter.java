@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 public class DataImporter {
 
-    private static final String MAP_URL_TEMPLATE = "http://maps.googleapis.com/maps/api/staticmap?scale=2&size=400x300&maptype=roadmap&format=png&visual_refresh=false&markers=icon:http://lofatsoftware.com/hotlinking/002/gmap-marker.png|color:0xff0000|{0},{1}&visible=Krak%C3%B3w&visible=49.100821,19.994676";
     private static final String DIR_NAME_DATA = "data";
     private static final String FILE_NAME_DATA = "dane.json";
 
@@ -54,7 +53,10 @@ public class DataImporter {
                 if (data.photoUrl == null) {
                     data.photoUrl = computePhotoUrl(directory);
                 }
-                data.mapUrl = computeMapUrl(data.longitude, data.latitude);
+
+                MapUrlComputer mapUrlComputer = new MapUrlComputer(directory, data.longitude, data.latitude);
+                data.mapUrl = mapUrlComputer.getUrl();
+
                 return data;
             }
         } catch (FileNotFoundException e) {
@@ -68,9 +70,7 @@ public class DataImporter {
         return (files.length > 0) ? files[0].getAbsolutePath() : null;
     }
 
-    private String computeMapUrl(String longitude, String latitude) {
-        return MessageFormat.format(MAP_URL_TEMPLATE, latitude, longitude);
-    }
+
 
 
 }

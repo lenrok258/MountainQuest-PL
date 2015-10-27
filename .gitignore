@@ -2,5 +2,5 @@
 target/
 .idea/
 src/main/resources/todo/
-done/
+src/main/resources/done/
 
