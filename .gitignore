@@ -2,4 +2,5 @@
 target/
 .idea/
 src/main/resources/todo/
+done/
 

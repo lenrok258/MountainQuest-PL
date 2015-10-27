@@ -138,13 +138,13 @@ public class Generator {
     }
 
     private PdfPTable generateMainTable(Data data, int pageNumber) throws DocumentException, IOException {
-        PdfPTable table = new PdfPTable(4);
+        PdfPTable table = new PdfPTable(12); // Bootstrap style
         table.setWidthPercentage(100f);
-        table.setWidths(new int[]{1, 1, 1, 1});
+        table.setWidths(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
         table.setExtendLastRow(true);
 
-        table.addCell(generateTitle(data));
-        table.addCell(generateData(data));
+        table.addCell(generateHeaderTitle(data));
+        table.addCell(generateHeaderData(data));
         table.addCell(generatePhoto(data));
         table.addCell(generateMapImage(data));
         table.addCell(generateDescription(data));
@@ -154,30 +154,31 @@ public class Generator {
         return table;
     }
 
-    private PdfPCell generateTitle(Data data) throws IOException, DocumentException {
+    private PdfPCell generateHeaderTitle(Data data) throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(phrase(data.title, 15, Font.BOLD));
         cell.setBorder(0);
         cell.setBorderWidthBottom(1);
         cell.setPaddingTop(10);
         cell.setPaddingBottom(10);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        cell.setColspan(3);
+        cell.setColspan(7);
         return cell;
     }
 
-    private PdfPCell generateData(Data data) throws IOException, DocumentException {
+    private PdfPCell generateHeaderData(Data data) throws IOException, DocumentException {
         String dataString = MessageFormat.format("{0}\n{1}m n.p.m.\n{2}, {3}",
                 data.mountains,
                 data.height,
                 data.latitude,
                 data.longitude);
-        PdfPCell cell = new PdfPCell(phrase(dataString, 10));
+        PdfPCell cell = new PdfPCell(phrase(dataString, 12));
         cell.setBorder(0);
         cell.setBorderWidthBottom(1);
         cell.setPaddingTop(10);
         cell.setPaddingBottom(10);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.setVerticalAlignment(Element.ALIGN_CENTER);
+        cell.setColspan(5);
         return cell;
     }
 
@@ -193,7 +194,7 @@ public class Generator {
         cell.setPaddingBottom(10);
         cell.setPaddingRight(5);
         cell.setBorderWidthBottom(1);
-        cell.setColspan(2);
+        cell.setColspan(6);
         return cell;
     }
 
@@ -204,18 +205,18 @@ public class Generator {
         cell.setPaddingBottom(10);
         cell.setPaddingLeft(5);
         cell.setBorderWidthBottom(1);
-        cell.setColspan(2);
+        cell.setColspan(6);
         return cell;
     }
 
     private PdfPCell generateDescription(Data data) throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(phrase(data.description, 14));
-        cell.setColspan(4);
         cell.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
         cell.setBorder(0);
         cell.setPaddingTop(10);
         cell.setPaddingBottom(15);
         cell.setBorderWidthBottom(1);
+        cell.setColspan(12);
         return cell;
 
     }
@@ -224,10 +225,10 @@ public class Generator {
         PdfPCell cell = new PdfPCell(phrase("- " + pageNumber + " -"));
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        cell.setColspan(2);
         cell.setBorder(0);
         cell.setPaddingBottom(10);
         cell.setBorderWidthBottom(1);
+        cell.setColspan(6);
         return cell;
     }
 
@@ -235,10 +236,10 @@ public class Generator {
         PdfPCell cell = new PdfPCell(phrase("Data i pieczątka"));
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-        cell.setColspan(2);
         cell.setBorder(0);
         cell.setPaddingBottom(10);
         cell.setBorderWidthBottom(1);
+        cell.setColspan(6);
         return cell;
     }
 
@@ -255,10 +256,7 @@ public class Generator {
     }
 
     private Font font(float fontSize, int style) throws IOException, DocumentException {
-        //BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
-        //FontFactory.register("/usr/share/fonts/truetype/abyssinica/", "my_bold_font");
         return FontFactory.getFont("Times-Roman", BaseFont.CP1250, BaseFont.EMBEDDED, fontSize, style);
-        //return new Font(baseFont, fontSize, style);
     }
 
     private Image imagePhoto(String imagePath) throws DocumentException, IOException {
