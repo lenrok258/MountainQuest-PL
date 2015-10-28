@@ -50,7 +50,6 @@ public class Generator {
     private void generatePage(Data data, int pageNumber) {
         try {
             System.out.println(MessageFormat.format("Page {0}: {1}", pageNumber, data.title));
-            Thread.sleep(Math.abs(new Random(System.currentTimeMillis()).nextLong()) % 1000); // trick GMaps API
             document.add(generateMainTable(data, pageNumber));
             document.newPage();
             tableOfContents.put(String.valueOf(pageNumber), data);

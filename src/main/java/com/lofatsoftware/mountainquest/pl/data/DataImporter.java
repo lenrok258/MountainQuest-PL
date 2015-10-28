@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URISyntaxException;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +43,7 @@ public class DataImporter {
 
     private Data loadDataFromDirectory(File directory) {
         try {
-            File[] files = directory.listFiles((current, name) -> {
+            File[] files = directory.listFiles((dir, name) -> {
                 return FILE_NAME_DATA.equals(name);
             });
             if (files.length == 1) {
@@ -54,8 +53,8 @@ public class DataImporter {
                     data.photoUrl = computePhotoUrl(directory);
                 }
 
-                MapUrlComputer mapUrlComputer = new MapUrlComputer(directory, data.longitude, data.latitude);
-                data.mapUrl = mapUrlComputer.getUrl();
+                MapImporter mapImporter = new MapImporter(directory, data.longitude, data.latitude);
+                data.mapUrl = mapImporter.getUrl();
 
                 return data;
             }
@@ -66,7 +65,8 @@ public class DataImporter {
     }
 
     private String computePhotoUrl(File directory) {
-        File[] files = directory.listFiles((current, name) -> name.endsWith(".png") || name.endsWith(".jpg"));
+        File[] files = directory.listFiles((current, name) ->
+                name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".PNG") || name.endsWith(".JPG"));
         return (files.length > 0) ? files[0].getAbsolutePath() : null;
     }
 
