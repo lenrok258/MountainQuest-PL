@@ -7,7 +7,7 @@ import com.itextpdf.text.pdf.BaseFont;
 
 import java.io.IOException;
 
-public abstract class PhraseGenerator {
+public abstract class PhraseUtil {
 
     public static com.itextpdf.text.Phrase phrase(String textToPrint) throws IOException, DocumentException {
         return phrase(textToPrint, 10);

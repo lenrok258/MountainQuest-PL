@@ -11,7 +11,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.lofatsoftware.mountainquest.pl.data.Data;
 import com.lofatsoftware.mountainquest.pl.generator.CropRectangle;
 import com.lofatsoftware.mountainquest.pl.generator.page.tiles.PageNumberCellGenerator;
-import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseGenerator;
+import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class DataPageGenerator implements PageGenerator {
     }
 
     private PdfPCell generateHeaderTitle(Data data) throws IOException, DocumentException {
-        PdfPCell cell = new PdfPCell(PhraseGenerator.phrase(data.title, 15, Font.BOLD));
+        PdfPCell cell = new PdfPCell(PhraseUtil.phrase(data.title, 15, Font.BOLD));
         cell.setBorder(0);
         cell.setBorderWidthBottom(1);
         cell.setPaddingTop(10);
@@ -67,7 +67,7 @@ public class DataPageGenerator implements PageGenerator {
                 data.height,
                 data.latitude,
                 data.longitude);
-        PdfPCell cell = new PdfPCell(PhraseGenerator.phrase(dataString, 12));
+        PdfPCell cell = new PdfPCell(PhraseUtil.phrase(dataString, 12));
         cell.setBorder(0);
         cell.setBorderWidthBottom(1);
         cell.setPaddingTop(10);
@@ -81,7 +81,7 @@ public class DataPageGenerator implements PageGenerator {
     private PdfPCell generatePhoto(Data data) throws IOException, DocumentException {
         PdfPCell cell;
         if (data.photoUrl == null) {
-            cell = new PdfPCell(PhraseGenerator.phrase("No image"));
+            cell = new PdfPCell(PhraseUtil.phrase("No image"));
         } else {
             cell = new PdfPCell(imagePhoto(data.photoUrl), true);
         }
@@ -106,7 +106,7 @@ public class DataPageGenerator implements PageGenerator {
     }
 
     private PdfPCell generateDescription(Data data) throws IOException, DocumentException {
-        PdfPCell cell = new PdfPCell(PhraseGenerator.phrase(data.description, 14));
+        PdfPCell cell = new PdfPCell(PhraseUtil.phrase(data.description, 14));
         cell.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
         cell.setBorder(0);
         cell.setPaddingTop(10);
@@ -117,7 +117,7 @@ public class DataPageGenerator implements PageGenerator {
     }
 
     private PdfPCell generateStamp(Data data) throws IOException, DocumentException {
-        PdfPCell cell = new PdfPCell(PhraseGenerator.phrase("Data i pieczątka"));
+        PdfPCell cell = new PdfPCell(PhraseUtil.phrase("Data i pieczątka"));
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.setBorder(0);
