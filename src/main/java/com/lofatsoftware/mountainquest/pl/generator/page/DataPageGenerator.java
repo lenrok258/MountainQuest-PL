@@ -9,7 +9,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.lofatsoftware.mountainquest.pl.data.Data;
-import com.lofatsoftware.mountainquest.pl.generator.CropRectangle;
+import com.lofatsoftware.mountainquest.pl.generator.page.utils.CropRectangle;
 import com.lofatsoftware.mountainquest.pl.generator.page.tiles.PageNumberCellGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
