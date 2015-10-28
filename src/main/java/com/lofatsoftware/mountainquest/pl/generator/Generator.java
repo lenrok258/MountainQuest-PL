@@ -34,6 +34,8 @@ public class Generator {
     }
 
     public void generatePdf(List<Data> data) throws IOException, DocumentException, InterruptedException {
+
+
         int pageNumber = 1;
         for (; pageNumber <= data.size(); pageNumber++) {
             Data dataItem = data.get(pageNumber - 1);
