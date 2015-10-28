@@ -1,8 +1,9 @@
-package com.lofatsoftware.mountainquest.pl;
+package com.lofatsoftware.mountainquest.pl.generator;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.lofatsoftware.mountainquest.pl.data.Data;
+import com.lofatsoftware.mountainquest.pl.generator.CropRectangle;
 
 import java.io.File;
 import java.io.FileNotFoundException;

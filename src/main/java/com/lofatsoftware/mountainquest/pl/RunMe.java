@@ -2,6 +2,7 @@ package com.lofatsoftware.mountainquest.pl;
 
 import com.lofatsoftware.mountainquest.pl.data.DataImporter;
 import com.lofatsoftware.mountainquest.pl.data.Data;
+import com.lofatsoftware.mountainquest.pl.generator.Generator;
 
 import java.util.Collections;
 import java.util.List;

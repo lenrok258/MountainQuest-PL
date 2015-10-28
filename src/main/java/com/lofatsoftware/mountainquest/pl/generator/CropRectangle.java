@@ -1,4 +1,4 @@
-package com.lofatsoftware.mountainquest.pl;
+package com.lofatsoftware.mountainquest.pl.generator;
 
 public class CropRectangle {
 
