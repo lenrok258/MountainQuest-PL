@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ContentGenerator {
 
-    private static final String RESULT_FILE = "mountain-quest-pl.pdf";
+    private static final String RESULT_FILE = "mountain-quest_content.pdf";
     private static final int PAGE_MARGIN = 20;
     private static final int NUMBER_OF_EMPTY_PAGES = 20;
 
