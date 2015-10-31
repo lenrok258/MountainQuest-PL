@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lofatsoftware</groupId>
-    <artifactId>schroniska</artifactId>
+    <artifactId>mountainquest</artifactId>
     <version>1.0</version>
 
     <dependencies>
