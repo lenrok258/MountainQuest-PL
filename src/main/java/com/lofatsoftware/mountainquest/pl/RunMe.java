@@ -34,6 +34,6 @@ public class RunMe {
         List<File> coverFiles = new CoversImporter().getDataList();
 
         CoverGenerator coverGenerator = new CoverGenerator(coverFiles);
-        //coverGenerator.generatePdf();
+        coverGenerator.generatePdf();
     }
 }

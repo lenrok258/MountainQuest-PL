@@ -4,6 +4,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -35,17 +36,19 @@ public class CoverGenerator {
     public void generatePdf() throws IOException, DocumentException {
 
         for (File coverFile : coverFiles) {
-            generateCoverPage(coverFile);
+            document.add(generateCoverPage(coverFile));
+            document.newPage();
         }
 
         document.close();
     }
 
-    private PdfPTable generateCoverPage(File cover) throws IOException, DocumentException {
+    private PdfPTable generateCoverPage(File coverFile) throws IOException, DocumentException {
 
-        PdfPCell cell = new PdfPCell(PhraseUtil.phrase("...........................\nImię i nazwisko", 14, Font.BOLD));
+        Image image = Image.getInstance(coverFile.toURL());
+
+        PdfPCell cell = new PdfPCell(image);
         cell.setBorder(0);
-
 
         PdfPTable table = new PdfPTable(1);
         table.setWidthPercentage(100f);

@@ -11,6 +11,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.lofatsoftware.mountainquest.pl.data.Data;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.CropRectangle;
 import com.lofatsoftware.mountainquest.pl.generator.page.tiles.PageNumberCellGenerator;
+import com.lofatsoftware.mountainquest.pl.generator.page.utils.ImageUtils;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.File;
@@ -139,36 +140,18 @@ public class DataPageGenerator implements PageGenerator {
         return cropMapImage(image);
     }
 
+    private Image cropPhotoImage(Image image) throws DocumentException {
+        float desiredRatio = 600f / 800f;
+        return ImageUtils.cropImageToMeetRatio(pdfWriter, image, desiredRatio);
+    }
+
     private Image cropMapImage(Image image) throws DocumentException {
         float width = image.getScaledWidth();
         float height = image.getScaledHeight();
         float footerReductionPercentage = GOOGLE_MAPS_FOOTER_HEIGHT / height;
         int widthReduction = (int) (width * footerReductionPercentage);
+        CropRectangle cropRectangle = new CropRectangle(0, widthReduction, 0, GOOGLE_MAPS_FOOTER_HEIGHT);
 
-        return cropImage(image, new CropRectangle(0, widthReduction, 0, GOOGLE_MAPS_FOOTER_HEIGHT));
+        return ImageUtils.cropImageToRectangle(pdfWriter, image, cropRectangle);
     }
-
-    private Image cropPhotoImage(Image image) throws DocumentException {
-        float desiredProportion = 600f / 800f;
-        float imageWidth = image.getScaledWidth();
-        float imageHeight = image.getScaledHeight();
-        float imageDesiredWidth = imageHeight / desiredProportion;
-        float widthToCut = imageWidth - imageDesiredWidth; //TODO: Sprawdzic czy liczba nie jest ujemna. Jeżeli tak to przycinać wysokość zamiast szerokości
-
-        return cropImage(image, new CropRectangle(widthToCut / 2, widthToCut / 2, 0, 0));
-    }
-
-    private Image cropImage(Image image, CropRectangle cropRectangle) throws DocumentException {
-        float width = image.getScaledWidth();
-        float height = image.getScaledHeight();
-        PdfTemplate template = pdfWriter.getDirectContent().createTemplate(
-                width - cropRectangle.leftReduction - cropRectangle.rightReduction,
-                height - cropRectangle.topReduction - cropRectangle.bottomReduction);
-        template.addImage(image,
-                width, 0, 0,
-                height, -cropRectangle.leftReduction, -cropRectangle.bottomReduction);
-        return Image.getInstance(template);
-    }
-
-
 }
