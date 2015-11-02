@@ -15,17 +15,9 @@ public class DataImporter {
     private static final String DIR_NAME_DATA = "data";
     private static final String FILE_NAME_DATA = "dane.json";
 
-    private List<Data> dataList;
     private Gson gson = new Gson();
 
     public List<Data> getDataList() throws URISyntaxException {
-        if (dataList == null) {
-            dataList = loadData();
-        }
-        return dataList;
-    }
-
-    private List<Data> loadData() throws URISyntaxException {
         List<File> dirs = listDirectories();
         return dirs.stream()
                 .map(this::loadDataFromDirectory)
@@ -69,8 +61,5 @@ public class DataImporter {
                 name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".PNG") || name.endsWith(".JPG"));
         return (files.length > 0) ? files[0].getAbsolutePath() : null;
     }
-
-
-
 
 }

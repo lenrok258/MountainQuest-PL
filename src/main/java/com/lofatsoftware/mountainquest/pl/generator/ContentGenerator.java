@@ -24,14 +24,16 @@ public class ContentGenerator {
     private final Document document;
     private final PdfWriter pdfWriter;
     private final LinkedHashMap<String, Data> tableOfContents = new LinkedHashMap<>();
+    private List<Data> data;
 
-    public ContentGenerator() throws FileNotFoundException, DocumentException {
+    public ContentGenerator(List<Data> dataList) throws FileNotFoundException, DocumentException {
+        this.data = dataList;
         document = new Document(PageSize.A4, PAGE_MARGIN, PAGE_MARGIN, PAGE_MARGIN, PAGE_MARGIN);
         pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(RESULT_FILE));
         document.open();
     }
 
-    public void generatePdf(List<Data> data) throws IOException, DocumentException, InterruptedException {
+    public void generatePdf() throws IOException, DocumentException, InterruptedException {
 
         generateFirstPage();
         generateEmptyPageWithoutPageNumber();

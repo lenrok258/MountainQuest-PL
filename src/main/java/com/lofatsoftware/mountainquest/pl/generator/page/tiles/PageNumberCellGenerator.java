@@ -2,12 +2,13 @@ package com.lofatsoftware.mountainquest.pl.generator.page.tiles;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.IOException;
 
-public class PageNumberCellGenerator implements TileGenerator {
+public class PageNumberCellGenerator {
 
     private int pageNumber;
 
@@ -15,7 +16,6 @@ public class PageNumberCellGenerator implements TileGenerator {
         this.pageNumber = pageNumber;
     }
 
-    @Override
     public PdfPCell generateTile() throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(PhraseUtil.phrase("- " + pageNumber + " -"));
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
