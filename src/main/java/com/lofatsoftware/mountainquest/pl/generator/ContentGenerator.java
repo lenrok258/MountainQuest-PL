@@ -34,6 +34,7 @@ public class ContentGenerator {
     public void generatePdf(List<Data> data) throws IOException, DocumentException, InterruptedException {
 
         generateFirstPage();
+        generateEmptyPageWithoutPageNumber();
 
         int pageNumber = 1;
         for (; pageNumber <= data.size(); pageNumber++) {
@@ -48,6 +49,7 @@ public class ContentGenerator {
     }
 
     private void generateFirstPage() throws IOException, DocumentException {
+        System.out.println("Page: first page");
         PdfPTable firstPage = new FirstPageGenerator().generatePage();
         document.add(firstPage);
         document.newPage();
@@ -73,6 +75,13 @@ public class ContentGenerator {
             document.add(emptyWithPageNumber);
             document.newPage();
         }
+    }
+
+    private void generateEmptyPageWithoutPageNumber() throws IOException, DocumentException {
+        System.out.println("Page: Empty page");
+        PdfPTable emptyWithPageNumber = new EmptyPageGenerator().generatePage();
+        document.add(emptyWithPageNumber);
+        document.newPage();
     }
 
     private void generateTableOfContents() throws DocumentException, IOException {

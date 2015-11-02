@@ -23,9 +23,7 @@ public class CoverGenerator {
     }
 
     public void generatePdf() {
-
-
-        document.close();
+        //document.close();
     }
 
 }
