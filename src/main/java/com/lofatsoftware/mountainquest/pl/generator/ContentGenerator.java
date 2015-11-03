@@ -11,6 +11,7 @@ import com.lofatsoftware.mountainquest.pl.generator.page.TableOfContentsPageGene
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.List;
@@ -33,7 +34,7 @@ public class ContentGenerator {
         document.open();
     }
 
-    public void generatePdf() throws IOException, DocumentException, InterruptedException {
+    public void generatePdf() throws IOException, DocumentException, InterruptedException, URISyntaxException {
 
         generateFirstPage();
         generateEmptyPageWithoutPageNumber();
@@ -50,9 +51,9 @@ public class ContentGenerator {
         document.close();
     }
 
-    private void generateFirstPage() throws IOException, DocumentException {
+    private void generateFirstPage() throws IOException, DocumentException, URISyntaxException {
         System.out.println("Page: first page");
-        PdfPTable firstPage = new FirstPageGenerator().generatePage();
+        PdfPTable firstPage = new FirstPageGenerator(pdfWriter).generatePage();
         document.add(firstPage);
         document.newPage();
     }

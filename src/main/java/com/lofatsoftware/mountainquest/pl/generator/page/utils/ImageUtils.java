@@ -1,11 +1,24 @@
 package com.lofatsoftware.mountainquest.pl.generator.page.utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class ImageUtils {
+
+    private static final String DIR_NAME_DATA = "/images";
+
+    public static Image readImageFromResources(String relativeImagePath) throws URISyntaxException, IOException, BadElementException {
+        File imageFile = new File(ImageUtils.class.getResource(DIR_NAME_DATA + "/" + relativeImagePath).toURI());
+        return Image.getInstance(imageFile.toURL());
+    }
 
     public static Image cropImageToRectangle(PdfWriter pdfWriter, Image image, CropRectangle cropRectangle) throws
             DocumentException {
