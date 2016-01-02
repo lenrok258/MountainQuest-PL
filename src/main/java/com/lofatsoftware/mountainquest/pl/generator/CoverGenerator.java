@@ -10,6 +10,7 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.lofatsoftware.mountainquest.pl.generator.page.CoverPageGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.ImageUtils;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
@@ -22,7 +23,6 @@ import java.util.List;
 public class CoverGenerator {
 
     private static final String RESULT_FILE = "mountain-quest_covers.pdf";
-    private static final int COVER_MARGIN = 10;
 
     private final Document document;
     private final PdfWriter pdfWriter;
@@ -35,7 +35,7 @@ public class CoverGenerator {
         this.document.open();
     }
 
-    public void generatePdf() throws IOException, DocumentException {
+    public void generatePdf() throws Exception {
         for (File coverFile : coverFiles) {
             System.out.println("Generating cover from file: " + coverFile.getName());
             document.add(generateCoverPage(coverFile));
@@ -45,28 +45,9 @@ public class CoverGenerator {
         document.close();
     }
 
-    private PdfPTable generateCoverPage(File coverFile) throws IOException, DocumentException {
-
-        Image image = Image.getInstance(coverFile.toURL());
-        float heightToWidthRatio = (210f / 297f);
-        Image imageCropped = ImageUtils.cropImageToMeetRatio(pdfWriter, image, heightToWidthRatio);
-
-        PdfPCell cell = new PdfPCell(imageCropped, true);
-        //cell.setBackgroundColor(BaseColor.YELLOW);
-        cell.setBorder(0);
-        cell.setPadding(COVER_MARGIN);
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        cell.setExtraParagraphSpace(0);
-        cell.setRightIndent(0);
-
-        PdfPTable table = new PdfPTable(1);;
-        table.setWidthPercentage(100f);
-        table.setWidths(new int[]{1});
-        table.setExtendLastRow(true);
-        table.addCell(cell);
-
-        return table;
+    private PdfPTable generateCoverPage(File coverFile) throws Exception {
+        CoverPageGenerator coverPageGenerator = new CoverPageGenerator(coverFile, pdfWriter);
+        return coverPageGenerator.generatePage();
     }
 
 }

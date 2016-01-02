@@ -30,7 +30,7 @@ public class RunMe {
         contentGenerator.generatePdf();
     }
 
-    private static void generateCoversPdf() throws IOException, DocumentException, URISyntaxException {
+    private static void generateCoversPdf() throws Exception {
         List<File> coverFiles = new CoversImporter().getDataList();
 
         CoverGenerator coverGenerator = new CoverGenerator(coverFiles);
