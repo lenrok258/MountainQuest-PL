@@ -25,7 +25,7 @@ import java.text.MessageFormat;
 public class DataPageGenerator implements PageGenerator {
 
     public static final float GOOGLE_MAPS_FOOTER_HEIGHT = 44f;
-    public static final BaseColor BACKGROUND_COLOR = new BaseColor(245, 245, 245);
+    public static final BaseColor BACKGROUND_COLOR = new BaseColor(199, 242, 199);
 
     private Data data;
     private int pageNumber;
