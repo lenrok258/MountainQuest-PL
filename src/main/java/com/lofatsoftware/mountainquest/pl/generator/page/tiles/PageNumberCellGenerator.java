@@ -4,6 +4,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
+import com.lofatsoftware.mountainquest.pl.generator.page.DataPageGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.IOException;
@@ -18,12 +19,13 @@ public class PageNumberCellGenerator {
 
     public PdfPCell generateTile() throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(PhraseUtil.phrase("- " + pageNumber + " -"));
-        cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setVerticalAlignment(Element.ALIGN_CENTER);
         cell.setBorder(0);
-        cell.setPaddingBottom(10);
-        cell.setBorderWidthBottom(1);
-        cell.setColspan(6);
+        cell.setPadding(0);
+        cell.setPadding(5);
+        cell.setPaddingBottom(9);
+        cell.setBackgroundColor(DataPageGenerator.BACKGROUND_COLOR);
         return cell;
     }
 }
