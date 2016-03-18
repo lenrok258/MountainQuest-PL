@@ -7,6 +7,7 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.lofatsoftware.mountainquest.pl.generator.page.common.Colors;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.ImageUtils;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
@@ -41,8 +42,6 @@ public class FirstPageGenerator implements PageGenerator {
         cell.setPaddingTop(10);
         cell.setPaddingBottom(10);
         cell.setBorder(0);
-        cell.setBorderWidthTop(1);
-        cell.setBorderWidthBottom(1);
         cell.setHorizontalAlignment(Element.ALIGN_MIDDLE);
         return cell;
     }
@@ -50,9 +49,12 @@ public class FirstPageGenerator implements PageGenerator {
     private PdfPCell generateTitleCell() throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(PhraseUtil.phrase("Kolekcjoner pieczątek", 25, Font.BOLD));
         cell.setBorder(0);
-        cell.setPaddingTop(150);
+        cell.setPaddingTop(130);
+        cell.setPaddingBottom(20);
+        cell.setPaddingLeft(20);
         cell.setHorizontalAlignment(Element.ALIGN_MIDDLE);
         cell.setVerticalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(Colors.DEFAULT_BACKGROUND_COLOR);
         return cell;
     }
 
@@ -63,6 +65,7 @@ public class FirstPageGenerator implements PageGenerator {
         cell.setPaddingBottom(10);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+        cell.setBackgroundColor(Colors.DEFAULT_BACKGROUND_COLOR);
         return cell;
     }
 }
