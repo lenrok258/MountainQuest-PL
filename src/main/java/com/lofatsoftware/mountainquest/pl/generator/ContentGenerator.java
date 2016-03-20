@@ -25,6 +25,7 @@ public class ContentGenerator {
     private final Document document;
     private final PdfWriter pdfWriter;
     private final LinkedHashMap<String, Data> tableOfContents = new LinkedHashMap<>();
+    private final BackgroundColorGenerator backgroundColorGenerator = new BackgroundColorGenerator();
     private List<Data> data;
 
     public ContentGenerator(List<Data> dataList) throws FileNotFoundException, DocumentException {
@@ -42,7 +43,8 @@ public class ContentGenerator {
         int pageNumber = 1;
         for (; pageNumber <= data.size(); pageNumber++) {
             Data dataItem = data.get(pageNumber - 1);
-            generateDataPage(dataItem, pageNumber);
+            BaseColor backgroundColor = backgroundColorGenerator.generate(dataItem);
+            generateDataPage(dataItem, pageNumber, backgroundColor);
         }
 
         generateEmptyPages(pageNumber, NUMBER_OF_EMPTY_PAGES);
@@ -58,10 +60,10 @@ public class ContentGenerator {
         document.newPage();
     }
 
-    private void generateDataPage(Data data, int pageNumber) {
+    private void generateDataPage(Data data, int pageNumber, BaseColor backgroundColor) {
         try {
             System.out.println(MessageFormat.format("Page {0}: {1}", pageNumber, data.title));
-            PdfPTable dataTable = new DataPageGenerator(data, pageNumber, pdfWriter).generatePage();
+            PdfPTable dataTable = new DataPageGenerator(data, pageNumber, backgroundColor, pdfWriter).generatePage();
             document.add(dataTable);
             document.newPage();
             tableOfContents.put(String.valueOf(pageNumber), data);

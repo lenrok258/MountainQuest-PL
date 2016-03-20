@@ -1,12 +1,11 @@
 package com.lofatsoftware.mountainquest.pl.generator.page;
 
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.lofatsoftware.mountainquest.pl.generator.BackgroundColorGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.tiles.PageNumberCellGenerator;
-import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.IOException;
 
@@ -31,7 +30,8 @@ public class EmptyPageGenerator implements PageGenerator {
         table.setWidthPercentage(100f);
         table.setWidths(new int[]{1, 1});
         table.setExtendLastRow(true);
-        table.addCell(new PageNumberCellGenerator(pageNumber).generateTile());
+        table.addCell(new PageNumberCellGenerator(pageNumber, BackgroundColorGenerator.DEFAULT_BACKGROUND_COLOR)
+                .generateTile());
         return table;
     }
 

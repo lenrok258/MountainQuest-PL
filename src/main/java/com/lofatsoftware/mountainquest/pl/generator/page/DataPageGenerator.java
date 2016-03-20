@@ -9,13 +9,11 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.lofatsoftware.mountainquest.pl.data.Data;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.CropRectangle;
 import com.lofatsoftware.mountainquest.pl.generator.page.tiles.PageNumberCellGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.ImageUtils;
-import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,15 +23,16 @@ import java.text.MessageFormat;
 public class DataPageGenerator implements PageGenerator {
 
     public static final float GOOGLE_MAPS_FOOTER_HEIGHT = 44f;
-    public static final BaseColor BACKGROUND_COLOR = new BaseColor(199, 242, 199);
 
     private Data data;
     private int pageNumber;
+    private BaseColor backgroundColor;
     private PdfWriter pdfWriter;
 
-    public DataPageGenerator(Data data, int pageNumber, PdfWriter pdfWriter) {
+    public DataPageGenerator(Data data, int pageNumber, BaseColor backgroundColor, PdfWriter pdfWriter) {
         this.data = data;
         this.pageNumber = pageNumber;
+        this.backgroundColor = backgroundColor;
         this.pdfWriter = pdfWriter;
     }
 
@@ -44,17 +43,17 @@ public class DataPageGenerator implements PageGenerator {
         table.setWidths(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
         table.setExtendLastRow(true);
 
-        table.addCell(generateHeaderTitle(data));
-        table.addCell(generateHeaderData(data));
-        table.addCell(generatePhoto(data));
-        table.addCell(generateMapImage(data));
-        table.addCell(generateDescription(data));
-        table.addCell(generateFooter(data));
+        table.addCell(generateHeaderTitle());
+        table.addCell(generateHeaderData());
+        table.addCell(generatePhoto());
+        table.addCell(generateMapImage());
+        table.addCell(generateDescription());
+        table.addCell(generateFooter());
 
         return table;
     }
 
-    private PdfPCell generateFooter(Data data) throws IOException, DocumentException {
+    private PdfPCell generateFooter() throws IOException, DocumentException {
 
         PdfPCell cell = new PdfPCell();
         cell.setColspan(12);
@@ -67,26 +66,26 @@ public class DataPageGenerator implements PageGenerator {
         innerTable.setWidths(new int[]{1, 1});
         innerTable.setWidthPercentage(100);
         innerTable.setPaddingTop(0);
-        innerTable.addCell(generateStamp(data));
-        innerTable.addCell(new PageNumberCellGenerator(pageNumber).generateTile());
+        innerTable.addCell(generateStamp());
+        innerTable.addCell(new PageNumberCellGenerator(pageNumber, backgroundColor).generateTile());
 
         cell.addElement(innerTable);
         return cell;
     }
 
-    private PdfPCell generateHeaderTitle(Data data) throws IOException, DocumentException {
+    private PdfPCell generateHeaderTitle() throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(phrase(data.title, 15, Font.BOLD));
         cell.setBorder(0);
         cell.setPaddingTop(10);
         cell.setPaddingBottom(10);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setColspan(7);
-        cell.setBackgroundColor(BACKGROUND_COLOR);
+        cell.setBackgroundColor(backgroundColor);
         cell.setPaddingLeft(10);
         return cell;
     }
 
-    private PdfPCell generateHeaderData(Data data) throws IOException, DocumentException {
+    private PdfPCell generateHeaderData() throws IOException, DocumentException {
         String dataString = MessageFormat.format("{0}\n{1}m n.p.m.\n{2}, {3}",
                 data.mountains,
                 data.height,
@@ -100,11 +99,11 @@ public class DataPageGenerator implements PageGenerator {
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.setVerticalAlignment(Element.ALIGN_CENTER);
         cell.setColspan(5);
-        cell.setBackgroundColor(BACKGROUND_COLOR);
+        cell.setBackgroundColor(backgroundColor);
         return cell;
     }
 
-    private PdfPCell generatePhoto(Data data) throws IOException, DocumentException {
+    private PdfPCell generatePhoto() throws IOException, DocumentException {
         PdfPCell cell;
         if (data.photoUrl == null) {
             cell = new PdfPCell(phrase("No image"));
@@ -119,7 +118,7 @@ public class DataPageGenerator implements PageGenerator {
         return cell;
     }
 
-    private PdfPCell generateMapImage(Data data) throws IOException, DocumentException {
+    private PdfPCell generateMapImage() throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(imageMap(data.mapUrl), true);
         cell.setBorder(0);
         cell.setPaddingTop(10);
@@ -129,27 +128,27 @@ public class DataPageGenerator implements PageGenerator {
         return cell;
     }
 
-    private PdfPCell generateDescription(Data data) throws IOException, DocumentException {
+    private PdfPCell generateDescription() throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(phrase(data.description, 14));
         cell.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
         cell.setBorder(0);
         cell.setPaddingTop(10);
         cell.setPaddingBottom(15);
-        cell.setBackgroundColor(BACKGROUND_COLOR);
+        cell.setBackgroundColor(backgroundColor);
         cell.setPaddingRight(10);
         cell.setPaddingLeft(10);
         cell.setColspan(12);
         return cell;
     }
 
-    private PdfPCell generateStamp(Data data) throws IOException, DocumentException {
+    private PdfPCell generateStamp() throws IOException, DocumentException {
         PdfPCell cell = new PdfPCell(phrase("Data i pieczątka"));
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.setVerticalAlignment(Element.ALIGN_CENTER);
         cell.setBorder(0);
         cell.setPadding(5);
         cell.setPaddingBottom(9);
-        cell.setBackgroundColor(BACKGROUND_COLOR);
+        cell.setBackgroundColor(backgroundColor);
         return cell;
     }
 

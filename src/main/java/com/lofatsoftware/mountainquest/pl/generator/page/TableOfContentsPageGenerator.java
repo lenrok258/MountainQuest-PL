@@ -7,6 +7,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.lofatsoftware.mountainquest.pl.data.Data;
+import com.lofatsoftware.mountainquest.pl.generator.BackgroundColorGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.IOException;
@@ -14,10 +15,12 @@ import java.util.LinkedHashMap;
 
 public class TableOfContentsPageGenerator implements PageGenerator {
 
+    private BackgroundColorGenerator backgroundColorGenerator = new BackgroundColorGenerator();
     private LinkedHashMap<String, Data> tableOfContents;
     private String currentSection = "";
+    private BaseColor currentBackgroundColor;
 
-    //TODO: For the sake of simplicity it should data List<Data>
+    //TODO: For the sake of simplicity it should take data List<Data>
     public TableOfContentsPageGenerator(LinkedHashMap<String, Data> tableOfContents) {
         this.tableOfContents = tableOfContents;
     }
@@ -48,14 +51,22 @@ public class TableOfContentsPageGenerator implements PageGenerator {
     }
 
     private void generateSectionTitle(PdfPTable table, Data data) throws IOException, DocumentException {
-        if ( !this.currentSection.equals(data.mountains) ) {
+        if (!this.currentSection.equals(data.mountains)) {
             currentSection = data.mountains;
+            currentBackgroundColor = backgroundColorGenerator.generate(data);
+
+            PdfPCell cellSeparator = new PdfPCell(PhraseUtil.phrase(" "));
+            cellSeparator.setBorder(0);
+            cellSeparator.setPadding(10);
+            cellSeparator.setColspan(4);
+            table.addCell(cellSeparator);
 
             PdfPCell cell = new PdfPCell(PhraseUtil.phrase(currentSection, 14, Font.BOLD));
             cell.setBorder(0);
-            cell.setPaddingTop(10);
+            cell.setPadding(10);
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setColspan(4);
+            cell.setBackgroundColor(currentBackgroundColor);
             table.addCell(cell);
         }
     }
