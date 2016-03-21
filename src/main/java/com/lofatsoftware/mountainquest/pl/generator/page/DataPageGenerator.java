@@ -86,9 +86,10 @@ public class DataPageGenerator implements PageGenerator {
     }
 
     private PdfPCell generateHeaderData() throws IOException, DocumentException {
-        String dataString = MessageFormat.format("{0}\n{1}m n.p.m.\n{2}, {3}",
+        String dataString = MessageFormat.format("{0}\n{1}m n.p.m., {2}km\n{3}, {4}",
                 data.mountains,
                 data.height,
+                data.distanceFromCracow,
                 data.latitude,
                 data.longitude);
         PdfPCell cell = new PdfPCell(phrase(dataString, 12));

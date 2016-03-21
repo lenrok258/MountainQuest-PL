@@ -15,6 +15,7 @@ public class Data implements Comparable<Data> {
     public String description;
     public String photoUrl;
     public String mapUrl;
+    public String distanceFromCracow;
 
     @Override
     public int compareTo(Data o) {

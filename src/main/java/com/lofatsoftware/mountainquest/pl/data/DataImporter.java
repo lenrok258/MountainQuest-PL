@@ -48,9 +48,12 @@ public class DataImporter {
                 MapImporter mapImporter = new MapImporter(directory, data.longitude, data.latitude);
                 data.mapUrl = mapImporter.getUrl();
 
+                DistanceImporter distanceImporter = new DistanceImporter(directory, data.longitude, data.latitude);
+                data.distanceFromCracow = distanceImporter.getDistanceFromCracow();
+
                 return data;
             }
-        } catch (FileNotFoundException e) {
+        } catch (java.io.IOException e) {
             e.printStackTrace();
         }
         return null;

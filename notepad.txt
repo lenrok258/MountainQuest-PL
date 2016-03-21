@@ -5,4 +5,4 @@ https://maps.googleapis.com/maps/api/distancematrix/output?parameters
 Cracow center: 50.062097,19.9345573
 Cracow, Bronowicka: 50.076845,19.9028273,17
 
-https://maps.googleapis.com/maps/api/distancematrix/json?origins=50.076845,19.9028273&destinations=49.476166,19.218655
+https://maps.googleapis.com/maps/api/distancematrix/json?origins=50.0768693,19.9028439&destinations=49.476166,19.218655
