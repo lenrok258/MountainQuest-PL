@@ -15,24 +15,32 @@ public class BackgroundColorGenerator {
 
     {
         //TODO: Put real colors
-        colors.add(BaseColor.BLUE);
         colors.add(BaseColor.RED);
-        colors.add(BaseColor.GREEN);
-        colors.add(BaseColor.YELLOW);
-        colors.add(BaseColor.CYAN);
-        colors.add(BaseColor.DARK_GRAY);
-        colors.add(BaseColor.MAGENTA);
-        colors.add(BaseColor.GREEN);
-        colors.add(BaseColor.ORANGE);
-        colors.add(BaseColor.LIGHT_GRAY);
-        colors.add(BaseColor.YELLOW);
-        colors.add(BaseColor.BLUE);
         colors.add(BaseColor.RED);
-        colors.add(BaseColor.GREEN);
-        colors.add(BaseColor.YELLOW);
-        colors.add(BaseColor.CYAN);
-        colors.add(BaseColor.DARK_GRAY);
-        colors.add(BaseColor.MAGENTA);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+        colors.add(BaseColor.RED);
+
+        colors.add(new BaseColor(255, 255, 176)); // yellow
+        colors.add(new BaseColor(255, 206, 206)); // pink
+        colors.add(new BaseColor(255, 236, 143)); // yellow-orange
+        colors.add(new BaseColor(184, 243, 243)); // blue
+        colors.add(new BaseColor(190, 255, 163)); // green
+        colors.add(new BaseColor(237, 200, 255)); // purpule
     }
 
     public BaseColor generate(Data dataItem) {
