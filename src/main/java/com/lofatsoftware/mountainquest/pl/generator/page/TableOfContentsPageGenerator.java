@@ -7,7 +7,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.lofatsoftware.mountainquest.pl.data.Data;
-import com.lofatsoftware.mountainquest.pl.generator.BackgroundColorGenerator;
+import com.lofatsoftware.mountainquest.pl.generator.page.utils.BackgroundColorGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.IOException;

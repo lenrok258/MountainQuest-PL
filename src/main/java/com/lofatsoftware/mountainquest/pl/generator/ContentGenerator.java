@@ -7,6 +7,7 @@ import com.lofatsoftware.mountainquest.pl.generator.page.DataPageGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.EmptyPageGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.FirstPageGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.TableOfContentsPageGenerator;
+import com.lofatsoftware.mountainquest.pl.generator.page.utils.BackgroundColorGenerator;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

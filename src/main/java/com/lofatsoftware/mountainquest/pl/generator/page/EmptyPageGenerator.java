@@ -4,7 +4,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.lofatsoftware.mountainquest.pl.generator.BackgroundColorGenerator;
+import com.lofatsoftware.mountainquest.pl.generator.page.utils.BackgroundColorGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.tiles.PageNumberCellGenerator;
 
 import java.io.IOException;

@@ -7,7 +7,7 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.lofatsoftware.mountainquest.pl.generator.BackgroundColorGenerator;
+import com.lofatsoftware.mountainquest.pl.generator.page.utils.BackgroundColorGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.ImageUtils;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 

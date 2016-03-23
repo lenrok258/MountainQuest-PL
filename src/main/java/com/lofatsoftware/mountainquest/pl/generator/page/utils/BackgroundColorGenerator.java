@@ -1,4 +1,4 @@
-package com.lofatsoftware.mountainquest.pl.generator;
+package com.lofatsoftware.mountainquest.pl.generator.page.utils;
 
 import com.itextpdf.text.BaseColor;
 import com.lofatsoftware.mountainquest.pl.data.Data;
