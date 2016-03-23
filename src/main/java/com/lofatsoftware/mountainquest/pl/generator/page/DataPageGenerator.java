@@ -149,6 +149,7 @@ public class DataPageGenerator implements PageGenerator {
         cell.setBorder(0);
         cell.setPadding(5);
         cell.setPaddingBottom(9);
+        cell.setPaddingLeft(10);
         cell.setBackgroundColor(backgroundColor);
         return cell;
     }

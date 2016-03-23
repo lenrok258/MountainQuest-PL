@@ -24,8 +24,8 @@ public class PageNumberCellGenerator {
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.setVerticalAlignment(Element.ALIGN_CENTER);
         cell.setBorder(0);
-        cell.setPadding(0);
         cell.setPadding(5);
+        cell.setPaddingRight(10);
         cell.setPaddingBottom(9);
         cell.setBackgroundColor(backgroundColor);
         return cell;

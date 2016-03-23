@@ -1,6 +1,7 @@
 package com.lofatsoftware.mountainquest.pl.generator.page;
 
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -26,12 +27,26 @@ public class EmptyPageGenerator implements PageGenerator {
     }
 
     private PdfPTable tableWithPageNumber() throws DocumentException, IOException {
-        PdfPTable table = new PdfPTable(2);
-        table.setWidthPercentage(100f);
-        table.setWidths(new int[]{1, 1});
-        table.setExtendLastRow(true);
-        table.addCell(new PageNumberCellGenerator(pageNumber, BackgroundColorGenerator.DEFAULT_BACKGROUND_COLOR)
+
+        PdfPTable innerTable = new PdfPTable(1);
+        innerTable.setWidths(new int[]{1});
+        innerTable.setWidthPercentage(100);
+        innerTable.setPaddingTop(0);
+        innerTable.addCell(new PageNumberCellGenerator(pageNumber, BackgroundColorGenerator.DEFAULT_BACKGROUND_COLOR)
                 .generateTile());
+
+        PdfPCell cell = new PdfPCell();
+        cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setBorder(0);
+        cell.setPadding(0);
+        cell.addElement(innerTable);
+
+        PdfPTable table = new PdfPTable(1);
+        table.setWidthPercentage(100f);
+        table.setWidths(new int[]{1});
+        table.setExtendLastRow(true);
+        table.addCell(cell);
         return table;
     }
 
