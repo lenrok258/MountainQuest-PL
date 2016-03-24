@@ -14,9 +14,11 @@ import com.lofatsoftware.mountainquest.pl.data.Data;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.CropRectangle;
 import com.lofatsoftware.mountainquest.pl.generator.page.tiles.PageNumberCellGenerator;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.ImageUtils;
+import com.lofatsoftware.mountainquest.pl.generator.page.utils.PhraseUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
 
@@ -37,7 +39,7 @@ public class DataPageGenerator implements PageGenerator {
     }
 
     @Override
-    public PdfPTable generatePage() throws DocumentException, IOException {
+    public PdfPTable generatePage() throws DocumentException, IOException, URISyntaxException {
         PdfPTable table = new PdfPTable(12); // Bootstrap style
         table.setWidthPercentage(100f);
         table.setWidths(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
@@ -85,14 +87,56 @@ public class DataPageGenerator implements PageGenerator {
         return cell;
     }
 
-    private PdfPCell generateHeaderData() throws IOException, DocumentException {
-        String dataString = MessageFormat.format("{0}\n{1}m n.p.m., {2}km\n{3}, {4}",
-                data.mountains,
-                data.height,
-                data.distanceFromCracow,
-                data.latitude,
-                data.longitude);
-        PdfPCell cell = new PdfPCell(phrase(dataString, 12));
+    private PdfPCell generateHeaderData() throws IOException, DocumentException, URISyntaxException {
+        String textMountain = MessageFormat.format("{0}", data.mountains);
+        PdfPCell cellMountain = new PdfPCell(PhraseUtil.phrase(textMountain, 12));
+        cellMountain.setBorder(0);
+        cellMountain.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cellMountain.setVerticalAlignment(Element.ALIGN_CENTER);
+        cellMountain.setPadding(0);
+        cellMountain.setPaddingBottom(4);
+
+        PdfPCell cellMountainIcon = new PdfPCell(ImageUtils.readImageFromResources("icons/mountains01.png"), true);
+        cellMountainIcon.setBorder(0);
+        cellMountainIcon.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cellMountainIcon.setFixedHeight(10);
+
+        String heightMountain = MessageFormat.format("{0}m n.p.m., {1}km", data.height, data.distanceFromCracow);
+        PdfPCell cellHeight = new PdfPCell(PhraseUtil.phrase(heightMountain, 12));
+        cellHeight.setBorder(0);
+        cellHeight.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cellHeight.setVerticalAlignment(Element.ALIGN_CENTER);
+        cellHeight.setPadding(0);
+        cellHeight.setPaddingBottom(4);
+
+        PdfPCell cellHeightIcon = new PdfPCell(ImageUtils.readImageFromResources("icons/map01.png"), true);
+        cellHeightIcon.setBorder(0);
+        cellHeightIcon.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cellHeightIcon.setFixedHeight(10);
+
+        String coordinatesMountain = MessageFormat.format("{0}, {1}", data.latitude, data.longitude);
+        PdfPCell cellCoordinates = new PdfPCell(PhraseUtil.phrase(coordinatesMountain, 12));
+        cellCoordinates.setBorder(0);
+        cellCoordinates.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cellCoordinates.setVerticalAlignment(Element.ALIGN_CENTER);
+        cellCoordinates.setPadding(0);
+        cellCoordinates.setPaddingBottom(4);
+
+        PdfPCell cellCoordinatesIcon = new PdfPCell(ImageUtils.readImageFromResources("icons/compas.png"), true);
+        cellCoordinatesIcon.setBorder(0);
+        cellCoordinatesIcon.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cellCoordinatesIcon.setFixedHeight(10);
+
+        PdfPTable headerTable = new PdfPTable(2);
+        headerTable.setWidths(new float[] {10, 1});
+        headerTable.addCell(cellMountain);
+        headerTable.addCell(cellMountainIcon);
+        headerTable.addCell(cellHeight);
+        headerTable.addCell(cellHeightIcon);
+        headerTable.addCell(cellCoordinates);
+        headerTable.addCell(cellCoordinatesIcon);
+
+        PdfPCell cell = new PdfPCell(headerTable);
         cell.setBorder(0);
         cell.setPaddingTop(10);
         cell.setPaddingBottom(10);
