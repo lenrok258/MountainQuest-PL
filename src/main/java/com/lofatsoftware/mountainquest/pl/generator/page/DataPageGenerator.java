@@ -55,7 +55,7 @@ public class DataPageGenerator implements PageGenerator {
         return table;
     }
 
-    private PdfPCell generateFooter() throws IOException, DocumentException {
+    private PdfPCell generateFooter() throws IOException, DocumentException, URISyntaxException {
 
         PdfPCell cell = new PdfPCell();
         cell.setColspan(12);
@@ -65,9 +65,9 @@ public class DataPageGenerator implements PageGenerator {
         cell.setPadding(0);
 
         PdfPTable innerTable = new PdfPTable(2);
+        innerTable.getDefaultCell().setBorder(0);
         innerTable.setWidths(new int[]{1, 1});
         innerTable.setWidthPercentage(100);
-        innerTable.setPaddingTop(0);
         innerTable.addCell(generateStamp());
         innerTable.addCell(new PageNumberCellGenerator(pageNumber, backgroundColor).generateTile());
 
@@ -186,16 +186,33 @@ public class DataPageGenerator implements PageGenerator {
         return cell;
     }
 
-    private PdfPCell generateStamp() throws IOException, DocumentException {
-        PdfPCell cell = new PdfPCell(phrase("Data i pieczątka"));
-        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-        cell.setVerticalAlignment(Element.ALIGN_CENTER);
-        cell.setBorder(0);
-        cell.setPadding(5);
-        cell.setPaddingBottom(9);
-        cell.setPaddingLeft(10);
-        cell.setBackgroundColor(backgroundColor);
-        return cell;
+    private PdfPCell generateStamp() throws IOException, DocumentException, URISyntaxException {
+
+        PdfPTable stampTable = new PdfPTable(2);
+        stampTable.setWidths(new float[] {1,12});
+
+        PdfPCell cellIcon = new PdfPCell(ImageUtils.readImageFromResources("icons/check.png"));
+        cellIcon.setFixedHeight(10);
+        cellIcon.setPadding(2);
+        cellIcon.setBorder(0);
+        cellIcon.setBackgroundColor(backgroundColor);
+
+        PdfPCell cellText = new PdfPCell(phrase("Data i pieczątka"));
+        cellText.setHorizontalAlignment(Element.ALIGN_LEFT);
+        cellText.setVerticalAlignment(Element.ALIGN_CENTER);
+        cellText.setBorder(0);
+        cellText.setBackgroundColor(backgroundColor);
+        cellText.setPadding(0);
+        cellText.setPaddingTop(5);
+        cellText.setPaddingLeft(5);
+
+        stampTable.addCell(cellIcon);
+        stampTable.addCell(cellText);
+
+        PdfPCell stampCell = new PdfPCell(stampTable);
+        stampCell.setPadding(0);
+        stampCell.setBorder(0);
+        return stampCell;
     }
 
     private Image imagePhoto(String imagePath) throws DocumentException, IOException {
