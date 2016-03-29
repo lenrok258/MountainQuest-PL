@@ -14,33 +14,37 @@ public class BackgroundColorGenerator {
     private BaseColor currentColor;
 
     {
-        //TODO: Put real colors
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-        colors.add(BaseColor.RED);
-
-        colors.add(new BaseColor(255, 255, 176)); // yellow
-        colors.add(new BaseColor(255, 206, 206)); // pink
-        colors.add(new BaseColor(255, 236, 143)); // yellow-orange
-        colors.add(new BaseColor(184, 243, 243)); // blue
-        colors.add(new BaseColor(190, 255, 163)); // green
+        colors.add(new BaseColor(216, 208, 255)); // purpule 2
         colors.add(new BaseColor(237, 200, 255)); // purpule
+        colors.add(new BaseColor(244, 214, 222)); // pink-dirty
+        colors.add(new BaseColor(255, 206, 206)); // pink
+        colors.add(new BaseColor(255, 232, 225)); // pink samon
+        colors.add(new BaseColor(255, 222, 147)); // orange 2
+        colors.add(new BaseColor(255, 245, 143)); // yellow-orange
+        colors.add(new BaseColor(249, 255, 117)); // yellow full
+        colors.add(new BaseColor(255, 255, 176)); // yellow light
+        colors.add(new BaseColor(238, 255, 196)); // green 2
+        colors.add(new BaseColor(190, 255, 163)); // green
+        colors.add(new BaseColor(208, 255, 236)); // aquamarine
+        colors.add(new BaseColor(184, 243, 243)); // blue
+        colors.add(new BaseColor(208, 231, 255)); // blue 2
+        colors.add(new BaseColor(208, 216, 255)); // blue-purpule
+
+        colors.add(new BaseColor(216, 208, 255)); // purpule 2
+        colors.add(new BaseColor(237, 200, 255)); // purpule
+        colors.add(new BaseColor(244, 214, 222)); // pink-dirty
+        colors.add(new BaseColor(255, 206, 206)); // pink
+        colors.add(new BaseColor(255, 232, 225)); // pink samon
+        colors.add(new BaseColor(255, 222, 147)); // orange 2
+        colors.add(new BaseColor(255, 245, 143)); // yellow-orange
+        colors.add(new BaseColor(249, 255, 117)); // yellow full
+        colors.add(new BaseColor(255, 255, 176)); // yellow light
+        colors.add(new BaseColor(238, 255, 196)); // green 2
+        colors.add(new BaseColor(190, 255, 163)); // green
+        colors.add(new BaseColor(208, 255, 236)); // aquamarine
+        colors.add(new BaseColor(184, 243, 243)); // blue
+        colors.add(new BaseColor(208, 231, 255)); // blue 2
+        colors.add(new BaseColor(208, 216, 255)); // blue-purpule
     }
 
     public BaseColor generate(Data dataItem) {
