@@ -3,10 +3,7 @@ package com.lofatsoftware.mountainquest.pl.generator;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.lofatsoftware.mountainquest.pl.data.Data;
-import com.lofatsoftware.mountainquest.pl.generator.page.DataPageGenerator;
-import com.lofatsoftware.mountainquest.pl.generator.page.EmptyPageGenerator;
-import com.lofatsoftware.mountainquest.pl.generator.page.FirstPageGenerator;
-import com.lofatsoftware.mountainquest.pl.generator.page.TableOfContentsPageGenerator;
+import com.lofatsoftware.mountainquest.pl.generator.page.*;
 import com.lofatsoftware.mountainquest.pl.generator.page.utils.BackgroundColorGenerator;
 
 import java.io.FileNotFoundException;
@@ -36,7 +33,7 @@ public class ContentGenerator {
         document.open();
     }
 
-    public void generatePdf() throws IOException, DocumentException, InterruptedException, URISyntaxException {
+    public void generatePdf() throws Exception {
 
         generateFirstPage();
         generateEmptyPageWithoutPageNumber();

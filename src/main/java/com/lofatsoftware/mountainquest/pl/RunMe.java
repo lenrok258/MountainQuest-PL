@@ -21,7 +21,7 @@ public class RunMe {
         generateCoversPdf();
     }
 
-    private static void generateContentPdf() throws URISyntaxException, DocumentException, IOException, InterruptedException {
+    private static void generateContentPdf() throws Exception {
         DataImporter dataImporter = new DataImporter();
         List<Data> dataList = dataImporter.getDataList();
         Collections.sort(dataList);
