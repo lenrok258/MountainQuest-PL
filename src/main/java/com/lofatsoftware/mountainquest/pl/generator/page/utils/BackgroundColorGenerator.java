@@ -19,11 +19,11 @@ public class BackgroundColorGenerator {
         colors.add(new BaseColor(255, 206, 206)); // pink
         colors.add(new BaseColor(255, 222, 147)); // orange 2
         colors.add(new BaseColor(255, 245, 143)); // yellow-orange
-        colors.add(new BaseColor(255, 255, 176)); // yellow light
-        colors.add(new BaseColor(238, 255, 196)); // green 2
+        colors.add(new BaseColor(249, 255, 102)); // yellow light
+        colors.add(new BaseColor(221, 247, 144)); // green-yellow
         colors.add(new BaseColor(190, 255, 163)); // green
-        colors.add(new BaseColor(208, 255, 236)); // aquamarine
         colors.add(new BaseColor(208, 231, 255)); // blue 2
+        colors.add(new BaseColor(208, 255, 236)); // aquamarine
         colors.add(new BaseColor(208, 216, 255)); // blue-purpule
 
         colors.add(new BaseColor(216, 208, 255)); // purpule 2
@@ -31,11 +31,11 @@ public class BackgroundColorGenerator {
         colors.add(new BaseColor(255, 206, 206)); // pink
         colors.add(new BaseColor(255, 222, 147)); // orange 2
         colors.add(new BaseColor(255, 245, 143)); // yellow-orange
-        colors.add(new BaseColor(255, 255, 176)); // yellow light
-        colors.add(new BaseColor(238, 255, 196)); // green 2
+        colors.add(new BaseColor(249, 255, 102)); // yellow light
+        colors.add(new BaseColor(221, 247, 144)); // green-yellow
         colors.add(new BaseColor(190, 255, 163)); // green
-        colors.add(new BaseColor(208, 255, 236)); // aquamarine
         colors.add(new BaseColor(208, 231, 255)); // blue 2
+        colors.add(new BaseColor(208, 255, 236)); // aquamarine
         colors.add(new BaseColor(208, 216, 255)); // blue-purpule
     }
 
