@@ -15,11 +15,17 @@ import java.util.Optional;
 
 public class MapImporter {
 
-    public static final String MAP_URL_TEMPLATE = "http://maps.googleapis" +
-            ".com/maps/api/staticmap?scale=2&size=400x300&maptype=roadmap&format=png&visual_refresh=false&markers" +
-            "=icon:http://lofatsoftware.com/hotlinking/002/002_2.png|{0}," +
-            "{1}&visible=Krak%C3%B3w&visible=49" +
-            ".100821,19.994676";
+    public static final String MAP_URL_TEMPLATE = "http://maps.googleapis.com/maps/api/staticmap" +
+            "?scale=2" +
+            "&size=400x300" +
+            "&maptype=roadmap" +
+            "&format=png" +
+            "&visual_refresh=false" +
+            "&markers=" +
+                "icon:http://lofatsoftware.com/hotlinking/002/002_2.png|" +
+                "{0},{1}" +
+            "&visible=Krak%C3%B3w" +
+            "&visible=49.100821,19.994676";
     public static final String MAP_LOCAL_FILE_NAME = "map.png-cache";
 
     private File dataDirectory;
