@@ -22,11 +22,8 @@ public class RunMe {
     }
 
     private static void generateContentPdf() throws Exception {
-        DataImporter dataImporter = new DataImporter();
-        List<Data> dataList = dataImporter.getDataList();
-        Collections.sort(dataList);
-
-        ContentGenerator contentGenerator = new ContentGenerator(dataList);
+        List<Data> sortedData = getSortedData();
+        ContentGenerator contentGenerator = new ContentGenerator(sortedData);
         contentGenerator.generatePdf();
     }
 
@@ -38,8 +35,14 @@ public class RunMe {
     }
 
     private static void generateWebPageMap() throws URISyntaxException, IOException {
-        DataImporter dataImporter = new DataImporter();
+        List<Data> sortedData = getSortedData();
+        new WebPageMapGenerator(sortedData).generateHtml();
+    }
 
-        new WebPageMapGenerator(dataImporter.getDataList()).generateHtml();
+    private static List<Data> getSortedData() throws URISyntaxException {
+        DataImporter dataImporter = new DataImporter();
+        List<Data> dataList = dataImporter.getDataList();
+        Collections.sort(dataList);
+        return dataList;
     }
 }
