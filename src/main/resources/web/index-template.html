@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Mountain quest - shelters map</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 800px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1>Mountain quest - shelters map</h1>
+<div id="map"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+
+<script>
+    function initMap() {
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+            center: {lat: 50.077024, lng: 19.905081},
+            zoom: 8
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+            content: "Trolo"
+        });
+        var marker = new google.maps.Marker({
+            position: {lat: 50.077024, lng: 19.905081},
+            map: map,
+            icon: 'img/marker2.png',
+            animation: google.maps.Animation.DROP,
+            title: 'Hello World!'
+        });
+        marker.addListener('click', function() { infowindow.open(map, marker); });
+
+
+        '###MARKERS###'
+
+    }
+</script>
+
+
+</body>
+
+</html>
